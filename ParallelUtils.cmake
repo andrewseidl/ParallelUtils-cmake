@@ -33,12 +33,12 @@ macro(enable_mpi_support)
 		# Add the MPI-specific compiler and linker flags
 		# Also, search for #includes in MPI's paths
 
-		list(APPEND CMAKE_C_COMPILE_FLAGS ${MPI_C_COMPILE_FLAGS})
-		list(APPEND CMAKE_C_LINK_FLAGS ${MPI_C_LINK_FLAGS})
+        set(CMAKE_C_COMPILE_FLAGS "${CMAKE_C_COMPILE_FLAGS} ${MPI_C_COMPILE_FLAGS}")
+        set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} ${MPI_C_LINK_FLAGS}")
 		include_directories(${MPI_C_INCLUDE_PATH})
 
-		list(APPEND CMAKE_CXX_COMPILE_FLAGS ${MPI_CXX_COMPILE_FLAGS})
-		list(APPEND CMAKE_CXX_LINK_FLAGS ${MPI_CXX_LINK_FLAGS})
+        set(CMAKE_CXX_COMPILE_FLAGS "${CMAKE_CXX_COMPILE_FLAGS} ${MPI_CXX_COMPILE_FLAGS}")
+        set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} ${MPI_CXX_LINK_FLAGS}")
 		include_directories(${MPI_CXX_INCLUDE_PATH})
 
 endmacro(enable_mpi_support)
@@ -59,8 +59,8 @@ macro(enable_openmp_support)
 		find_package("OpenMP" REQUIRED)
 
 		# Add the OpenMP-specific compiler and linker flags
-		list(APPEND CMAKE_CXX_FLAGS ${OpenMP_CXX_FLAGS})
-		list(APPEND CMAKE_C_FLAGS ${OpenMP_C_FLAGS})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
 
 endmacro(enable_openmp_support)
 # Done configuring OpenMP Options
