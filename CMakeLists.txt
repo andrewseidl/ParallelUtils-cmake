@@ -30,10 +30,4 @@ include(ParallelUtils.cmake)
 
 ## Example CUDA program
 #enable_cuda_support()
-#if(LIBCUTIL AND LIBSHRUTIL)
-#		cuda_add_executable(bandwidthTest bandwidthTest.cu)
-#		target_link_libraries(bandwidthTest ${LIBCUTIL} ${LIBSHRUTIL})
-#else()
-#		message(FATAL_ERROR "Could not find libcutil or libshrutil. Please
-#check CUDA_SDK_LIB_DIR and verify that these libraries have been built.")
-#endif()
+#cuda_add_executable(bandwidthTest bandwidthTest.cu)

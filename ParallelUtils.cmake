@@ -91,7 +91,7 @@ macro(enable_cuda_support)
 		# select Compute Capability
 		# This needs to be manually updated when devices with new CCs come out
 		set(CUDA_DEVICE_VERSION "20" CACHE STRING "CUDA Device Version")
-		set_property(CACHE CUDA_DEVICE_VERSION PROPERTY STRINGS "10" "11" "12" "13"	"20" "21")
+		set_property(CACHE CUDA_DEVICE_VERSION PROPERTY STRINGS "10" "11" "12" "13"	"20" "21" "30")
 
 		# Enable fast-math for CUDA (_not_ GCC)
 		set(CUDA_FAST_MATH TRUE CACHE BOOL "Use Fast Math Operations")
