@@ -115,22 +115,6 @@ macro(enable_cuda_support)
 		set(CUDA_SDK_LIB_DIR ${CUDA_SDK_ROOT_DIR}/common/lib
 				${CUDA_SDK_ROOT_DIR}/lib ${CUDA_SDK_ROOT_DIR}/../shared/lib)
 
-		# Find path to shrutil libs, from CUDA SDK
-		find_library(LIBSHRUTIL
-				NAMES shrUtils${CMAKE_ARCH_BITNESS} shrutil_${CMAKE_SYSTEM_PROCESSOR}
-				PATHS ${CUDA_SDK_LIB_DIR})
-		find_library(LIBSHRUTIL_DBG
-				NAMES shrUtils${CMAKE_ARCH_BITNESS}D shrutil_${CMAKE_SYSTEM_PROCESSOR}D
-				PATHS ${CUDA_SDK_LIB_DIR})
-
-		# Find path to cutil libs, from CUDA SDK
-		find_library(LIBCUTIL
-				NAMES cutil${CMAKE_ARCH_BITNESS} cutil_${CMAKE_SYSTEM_PROCESSOR}
-				PATHS ${CUDA_SDK_LIB_DIR})
-		find_library(LIBCUTIL_DBG
-				NAMES cutil${arch}D cutil_${CMAKE_SYSTEM_PROCESSOR}D
-				PATHS ${CUDA_SDK_LIB_DIR})
-
 		# Set custom compiler flags
 		set(CUDA_NVCC_FLAGS "" CACHE STRING "" FORCE)
 
