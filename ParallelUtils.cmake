@@ -80,7 +80,6 @@ macro(enable_cuda_support)
 
     # Hide a number of options from the default CMake screen
     mark_as_advanced(CLEAR CUDA_BUILD_CUBIN)
-    mark_as_advanced(CLEAR CUDA_SDK_ROOT_DIR)
     mark_as_advanced(CLEAR CUDA_TOOLKIT_ROOT_DIR)
     mark_as_advanced(CLEAR CUDA_VERBOSE_BUILD)
     mark_as_advanced(CLEAR CUDA_FAST_MATH)
@@ -107,13 +106,6 @@ macro(enable_cuda_support)
 
     # Let's get going...
     find_package("CUDA" REQUIRED)
-
-    # Frequently used in the examples
-    cuda_include_directories(${CUDA_SDK_ROOT_DIR}/common/inc)
-    cuda_include_directories(${CUDA_SDK_ROOT_DIR}/../shared/inc)
-
-    set(CUDA_SDK_LIB_DIR ${CUDA_SDK_ROOT_DIR}/common/lib
-        ${CUDA_SDK_ROOT_DIR}/lib ${CUDA_SDK_ROOT_DIR}/../shared/lib)
 
     # Set custom compiler flags
     set(CUDA_NVCC_FLAGS "" CACHE STRING "" FORCE)
