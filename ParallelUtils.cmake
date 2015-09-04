@@ -85,12 +85,16 @@ macro(enable_cuda_support)
     mark_as_advanced(CLEAR CUDA_FAST_MATH)
     mark_as_advanced(CLEAR CUDA_USE_CUSTOM_COMPILER)
     mark_as_advanced(CLEAR CUDA_VERBOSE_PTX)
-    mark_as_advanced(CLEAR CUDA_DEVICE_VERSION)
+    mark_as_advanced(CLEAR CUDA_COMPUTE_CAPABILITY)
 
     # select Compute Capability
     # This needs to be manually updated when devices with new CCs come out
-    set(CUDA_DEVICE_VERSION "20" CACHE STRING "CUDA Device Version")
-    set_property(CACHE CUDA_DEVICE_VERSION PROPERTY STRINGS "10" "11" "12" "13"	"20" "21" "30" "32" "35" "37" "50" "52")
+    set(CUDA_COMPUTE_CAPABILITY "20" CACHE STRING "Minimum CUDA compute capability")
+    execute_process(COMMAND ${CUDA_NVCC_EXECUTABLE} --help OUTPUT_VARIABLE CUDA_HELP)
+    string(REGEX MATCHALL "compute_[0-9]+" CUDA_CCS "${CUDA_HELP}")
+    string(REGEX MATCHALL "[0-9]+" CUDA_CCS "${CUDA_CCS}")
+    list(REMOVE_DUPLICATES CUDA_CCS)
+    set_property(CACHE CUDA_COMPUTE_CAPABILITY PROPERTY STRINGS ${CUDA_CCS})
 
     # Enable fast-math for CUDA (_not_ GCC)
     set(CUDA_FAST_MATH TRUE CACHE BOOL "Use Fast Math Operations")
@@ -126,7 +130,7 @@ macro(enable_cuda_support)
     # Tell nvcc to compile for the selected Compute Capability
     # This can also be called from the main CMakeLists.txt to enable
     # support for additional CCs
-    set_compute_capability(${CUDA_DEVICE_VERSION})
+    set_compute_capability(${CUDA_COMPUTE_CAPABILITY})
 
     # Enable fast-math if selected
     if(CUDA_FAST_MATH)
